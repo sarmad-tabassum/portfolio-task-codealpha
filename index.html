@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sarmad Tabassum — Frontend Developer</title>
+    <!-- CodeAlpha Task 01 — Portfolio -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✎</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ═══════════════ LOADER ═══════════════ -->
+    <div id="loader">
+      <span class="ln">sarmad tabassum — folio</span><span id="lnum">000</span>
+    </div>
+
+    <!-- custom cursor + scroll progress -->
+    <div class="cur-dot" id="cdot"></div>
+    <div class="cur-ring" id="cring"><span>open</span></div>
+    <div id="prog"></div>
+
+    <!-- ═══════════════ NAV ═══════════════ -->
+    <nav class="top">
+      <span class="name">Sarmad Tabassum</span>
+      <span class="clock mono" id="clock">— PKT —</span>
+      <nav class="anchors mono">
+        <a href="#services">services</a><a href="#work">work</a
+        ><a href="#about">about</a> <a href="#process">process</a
+        ><a href="#experience">experience</a><a href="#contact">contact</a>
+      </nav>
+      <a class="cv mono mag" href="#" id="cvBtn">cv ↓</a>
+    </nav>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <header class="hero">
+      <span class="eyebrow mono"
+        ><i></i>open to internships &amp; entry-level roles</span
+      >
+      <h1>
+        <span class="msk"><span>Sarmad</span></span>
+        <span class="msk"
+          ><span>Tabassum<em>.</em></span></span
+        >
+      </h1>
+      <div class="sub">
+        <span class="mono">—</span
+        ><span
+          id="role"
+          data-roles="frontend developer, react.js developer, tailwind css enjoyer, rest api integrator, supabase tinkerer"
+          >frontend developer</span
+        >
+      </div>
+      <p class="lead">
+        Frontend-focused developer from <b>Karachi</b> — HTML, CSS, JavaScript
+        and React.js, with real <b>REST API + Supabase</b> experience. Expanding
+        into full-stack, one shipped project at a time.
+      </p>
+      <div class="cta">
+        <a class="btn fill mag" href="#work">see the work</a>
+        <a class="btn mag" href="#contact">say hello</a>
+      </div>
+      <div class="side">
+        <div class="note">hire this guy.<br />he answers fast ↯</div>
+        <figure class="polaroid">
+          <img src="./assets/portrait.png" alt="Sarmad Tabassum Pic" />
+          <figcaption>me, pretending to work</figcaption>
+        </figure>
+      </div>
+      <span class="down mono">scroll ↓ slowly</span>
+    </header>
+
+    <!-- ═══════════════ SKILLS MARQUEE ═══════════════ -->
+    <div class="mq" aria-hidden="true">
+      <div id="mq1">
+        <span>html5</span><b>✦</b><span>css3</span><b>✦</b
+        ><span>javascript (es6+)</span><b>✦</b><span>react.js</span><b>✦</b
+        ><span>tailwind css</span><b>✦</b><span>bootstrap</span><b>✦</b
+        ><span>supabase</span><b>✦</b><span>rest apis</span><b>✦</b
+        ><span>github</span><b>✦</b><span>axios</span><b>✦</b>
+      </div>
+    </div>
+
+    <!-- ═══════════════ STATS ═══════════════ -->
+    <section
+      id="stats"
+      style="border-top: 0; padding-top: 70px; padding-bottom: 0"
+    >
+      <div class="stats">
+        <div class="stat rv">
+          <b><span class="cnt" data-count="3" data-suf="+">0</span></b
+          ><small class="mono">projects shipped</small>
+        </div>
+        <div class="stat rv">
+          <b><span class="cnt" data-count="10" data-suf="+">0</span></b
+          ><small class="mono">technologies</small>
+        </div>
+        <div class="stat rv">
+          <b><span class="cnt" data-count="2" data-suf="">0</span></b
+          ><small class="mono">training &amp; internship</small>
+        </div>
+        <div class="stat rv">
+          <b><span class="cnt" data-count="900" data-suf="+">0</span></b
+          ><small class="mono">cups of chai</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ SERVICES ═══════════════ -->
+    <section id="services">
+      <div class="shead mono">
+        <span><b>§01</b> — what I do</span><span>pick your poison</span>
+      </div>
+      <div>
+        <button class="srow rv">
+          <span class="no">(01)</span
+          ><span
+            ><h3>Frontend Development</h3>
+            <p>
+              Semantic HTML5 &amp; CSS3, web page structuring and design — pages
+              that work everywhere, even on that one uncle's phone.
+            </p></span
+          ><span class="ar">→</span>
+        </button>
+        <button class="srow rv">
+          <span class="no">(02)</span
+          ><span
+            ><h3>React Development</h3>
+            <p>
+              Components, hooks and API integration — state that stays
+              predictable and UI that updates without drama.
+            </p></span
+          ><span class="ar">→</span>
+        </button>
+        <button class="srow rv">
+          <span class="no">(03)</span
+          ><span
+            ><h3>API &amp; Supabase Integration</h3>
+            <p>
+              REST APIs, Axios, and Supabase for data &amp; storage — real
+              backend behaviour without the backend headache.
+            </p></span
+          ><span class="ar">→</span>
+        </button>
+        <button class="srow rv">
+          <span class="no">(04)</span
+          ><span
+            ><h3>Responsive &amp; Clean UI</h3>
+            <p>
+              Tailwind CSS and Bootstrap layouts with an eye for UI detail —
+              because the last 10% is the part people actually feel.
+            </p></span
+          ><span class="ar">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ═══════════════ WORK / PROJECTS ═══════════════ -->
+    <section id="work">
+      <div class="shead mono">
+        <span><b>§02</b> — selected work</span><span>2024 → 2025</span>
+      </div>
+
+      <div id="rows">
+        <!-- Project 1 -->
+        <div>
+          <button
+            class="row"
+            aria-expanded="false"
+            data-img="./assets/Post-App.png"
+          >
+            <span class="no">/01</span>
+            <h3>Postify</h3>
+            <span class="meta">react · supabase — 2025</span
+            ><span class="ar">+</span>
+          </button>
+          <div class="panel">
+            <div class="in2">
+              <img src="./assets/Post-App.png" alt="Postify" loading="lazy" />
+              <div>
+                <p>
+                  Front end of a full-stack publishing platform, built
+                  end-to-end — CRUD operations, interactive user profiles and
+                  image uploads, connected to Supabase for storage and data
+                  management.
+                </p>
+                <p class="stack">
+                  — react.js / supabase / crud / image uploads
+                </p>
+                <div class="links">
+                  <a
+                    href="https://github.com/sarmad-tabassum/complete-post-app"
+                    target="_blank"
+                    rel="noopener"
+                    >view code ↗</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div>
+          <button
+            class="row"
+            aria-expanded="false"
+            data-img="./assets/Weather-App.png"
+          >
+            <span class="no">/02</span>
+            <h3>Dynamic Weather</h3>
+            <span class="meta">js · axios · weatherapi — 2025</span
+            ><span class="ar">+</span>
+          </button>
+          <div class="panel">
+            <div class="in2">
+              <img
+                src="./assets/Weather-App.png"
+                alt="Dynamic Weather"
+                loading="lazy"
+              />
+              <div>
+                <p>
+                  Interactive weather-tracking interface — Axios pulls real-time
+                  data from WeatherAPI, with dynamic UI updates and background
+                  video transitions based on current conditions.
+                </p>
+                <p class="stack">
+                  — javascript / axios / weatherapi / rest api
+                </p>
+                <div class="links">
+                  <a
+                    href="https://github.com/sarmad-tabassum/weather-app-with-details"
+                    target="_blank"
+                    rel="noopener"
+                    >view code ↗</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- project 3 -->
+        <div>
+          <button
+            class="row"
+            aria-expanded="false"
+            data-img="./assets/News-App.png"
+          >
+            <span class="no">/03</span>
+            <h3>News Portal</h3>
+            <span class="meta">vanilla js · rest api — 2024</span
+            ><span class="ar">+</span>
+          </button>
+          <div class="panel">
+            <div class="in2">
+              <img
+                src="./assets/News-App.png"
+                alt="News Portal"
+                loading="lazy"
+              />
+              <div>
+                <p>
+                  Real-time news feed with vanilla JavaScript and REST APIs —
+                  structured HTML5/CSS3 and responsive layouts for a clean
+                  reading experience across devices.
+                </p>
+                <p class="stack">— vanilla js / rest api / html5 / css3</p>
+                <div class="links">
+                  <a
+                    href="https://github.com/sarmad-tabassum/news-app-by-api-smit"
+                    target="_blank"
+                    rel="noopener"
+                    >view code ↗</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- project 4 -->
+        <div>
+          <button
+            class="row"
+            aria-expanded="false"
+            data-img="./assets/CodeAlpha.png"
+          >
+            <span class="no">/04</span>
+            <h3>CodeAlpha Tasks</h3>
+            <span class="meta">html · css · js — 2025</span
+            ><span class="ar">+</span>
+          </button>
+          <div class="panel">
+            <div class="in2">
+              <img
+                src="./assets/CodeAlpha.png"
+                alt="CodeAlpha Tasks"
+                loading="lazy"
+              />
+              <div>
+                <p>
+                  Internship task suite: a darkroom-style image gallery with
+                  lightbox, an adding-machine calculator with printed tape, and
+                  a cassette-deck music player synthesized live with the Web
+                  Audio API.
+                </p>
+                <p class="stack">— html5 / css3 / vanilla js / web audio api</p>
+                <div class="links">
+                  <a
+                    href="https://github.com/sarmad-tabassum/portfolio-task-codealpha"
+                    target="_blank"
+                    rel="noopener"
+                    >view code ↗</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="peek"><img alt="" src="" /></div>
+
+    <!-- ═══════════════ ABOUT ═══════════════ -->
+    <section id="about">
+      <div class="shead mono">
+        <span><b>§03</b> — about</span><span>the short version</span>
+      </div>
+      <div class="about">
+        <div>
+          <p class="big rv">
+            Started with <mark>view-source</mark> curiosity in Karachi, got
+            serious at <mark>Saylani Mass IT</mark> — now I build responsive
+            interfaces with React, wire them to REST APIs and Supabase, and
+            sweat the UI details most people scroll past.
+          </p>
+          <p class="big rv" style="margin-top: 1.4rem">
+            My rule is simple:
+            <mark>ship real projects, not just tutorials.</mark> A publishing
+            platform, a weather app and a news portal later — I'm still the
+            first one to open DevTools when something looks off.
+          </p>
+          <h4 class="mono rv">— daily drivers</h4>
+          <p class="tools rv">
+            HTML5<i>/</i>CSS3<i>/</i>JavaScript
+            (ES6+)<i>/</i>React.js<i>/</i>Tailwind
+            CSS<i>/</i>Supabase<i>/</i>REST APIs<i>/</i>GitHub
+          </p>
+          <div class="now rv">
+            <b>currently:</b> web &amp; app dev course @ saylani mass it ·
+            codealpha internship tasks · polishing postify
+          </div>
+        </div>
+        <div>
+          <figure class="polaroid s rv">
+            <img src="./assets/workspace.png" alt="My desk setup" />
+            <figcaption>the desk · late night · chai no.3</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ PROCESS ═══════════════ -->
+    <section id="process">
+      <div class="shead mono">
+        <span><b>§04</b> — how I work</span><span>boring on purpose</span>
+      </div>
+      <div class="pline"></div>
+      <div class="steps">
+        <div class="step rv">
+          <span class="num">01</span>
+          <h3>Understand</h3>
+          <p>
+            Read the actual requirement, not just the feature request. Ask the
+            uncomfortable questions early.
+          </p>
+        </div>
+        <div class="step rv">
+          <span class="num">02</span>
+          <h3>Structure</h3>
+          <p>
+            Semantic HTML first, design second. Cheap iterations beat expensive
+            rewrites every single time.
+          </p>
+        </div>
+        <div class="step rv">
+          <span class="num">03</span>
+          <h3>Build &amp; debug</h3>
+          <p>
+            Component by component, API by API. Strong debugging over guesswork
+            — console log first, panic later.
+          </p>
+        </div>
+        <div class="step rv">
+          <span class="num">04</span>
+          <h3>Ship &amp; learn</h3>
+          <p>
+            Deploy, get feedback, level up. Every project on GitHub is a lesson
+            I can point to.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ EXPERIENCE & EDUCATION ═══════════════ -->
+    <section id="experience">
+      <div class="shead mono">
+        <span><b>§05</b> — experience &amp; education</span
+        ><span>the road so far</span>
+      </div>
+      <div class="tl">
+        <div class="tli rv">
+          <time>2025 — present</time>
+          <h3>Frontend Intern <span>· CodeAlpha · remote</span></h3>
+          <p>
+            Completing real-world frontend tasks — image gallery, calculator,
+            portfolio and a Web-Audio music player — shipped as
+            production-quality repos on GitHub.
+          </p>
+        </div>
+        <div class="tli rv">
+          <time>in progress</time>
+          <h3>
+            Web &amp; App Development Course
+            <span>· Saylani Mass IT Training, Karachi</span>
+          </h3>
+          <p>
+            Expanding frontend skills into full-stack — building on React, REST
+            APIs and Supabase with guided, project-based learning.
+          </p>
+        </div>
+        <div class="tli rv">
+          <time>2023 — 2025</time>
+          <h3>
+            FSc (Pre-Engineering) <span>· Bahria College Karsaz, Karachi</span>
+          </h3>
+          <p>
+            Science foundation while self-learning web development on the side —
+            side projects grew faster than the syllabus.
+          </p>
+        </div>
+        <div class="tli rv">
+          <time>2021 — 2023</time>
+          <h3>Matriculation <span>· Bahria College Karsaz, Karachi</span></h3>
+          <p>
+            Where it started — first HTML tags, first "how does this website
+            work", first view-source.
+          </p>
+        </div>
+      </div>
+      <div class="certs rv">
+        <span>web &amp; app dev — saylani mass it (in progress)</span>
+        <span>codealpha frontend internship</span>
+        <span>github &amp; version control</span>
+        <span>rest api integration</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CORE COMPETENCIES ═══════════════ -->
+    <section id="words">
+      <div class="shead mono">
+        <span><b>§06</b> — core competencies</span
+        ><span>straight from the cv</span>
+      </div>
+      <div class="tgrid">
+        <figure class="tcard rv">
+          <p>
+            Clear communicator, comfortable collaborating in a remote or
+            team-based environment.
+          </p>
+          <footer>
+            <b>Communication</b><small>core competency · cv 2025</small>
+          </footer>
+        </figure>
+        <figure class="tcard rv">
+          <p>
+            Strong problem-solving and debugging skills, with an eye for UI
+            detail.
+          </p>
+          <footer>
+            <b>Problem-solving &amp; Detail</b
+            ><small>core competency · cv 2025</small>
+          </footer>
+        </figure>
+        <figure class="tcard rv">
+          <p>
+            Self-motivated and fast at picking up new tools, frameworks, and
+            workflows independently.
+          </p>
+          <footer>
+            <b>Fast Learner</b><small>core competency · cv 2025</small>
+          </footer>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CONTACT ═══════════════ -->
+    <section id="contact">
+      <div class="shead mono">
+        <span><b>§07</b> — contact</span><span>replies within 24h</span>
+      </div>
+      <h2 class="rv">Got something worth building?</h2>
+      <a
+        class="mail rv"
+        id="mail"
+        href="mailto:sarmadtabassum7@gmail.com"
+        data-scramble
+        >sarmadtabassum7@gmail.com</a
+      >
+      <div class="cwrap">
+        <div class="rv">
+          <div class="socials mono">
+            <a
+              href="https://github.com/sarmad-tabassum"
+              target="_blank"
+              rel="noopener"
+              >github ↗</a
+            >
+            <a
+              href="https://www.linkedin.com/in/sarmad-tabassum/"
+              target="_blank"
+              rel="noopener"
+              >linkedin ↗</a
+            >
+            <a href="https://wa.me/923353949723" target="_blank" rel="noopener"
+              >whatsapp ↗</a
+            >
+          </div>
+          <p class="mono" style="margin-top: 1.6rem; color: var(--mut)">
+            +92 335 3949723
+          </p>
+          <p class="mono" style="margin-top: 0.5rem; color: var(--mut)">
+            Majeed S.R.E Stadium Road · Karachi · <span id="clock2">—</span> pkt
+          </p>
+          <p class="mono" style="margin-top: 0.5rem; color: var(--mut)">
+            languages — english · urdu · punjabi
+          </p>
+        </div>
+        <form id="cform" novalidate class="rv">
+          <div class="field">
+            <label for="fn">name</label
+            ><input id="fn" type="text" autocomplete="name" /><span
+              class="msg"
+            ></span>
+          </div>
+          <div class="field">
+            <label for="fe">email</label
+            ><input id="fe" type="email" autocomplete="email" /><span
+              class="msg"
+            ></span>
+          </div>
+          <div class="field">
+            <label for="fm">message</label><textarea id="fm" rows="4"></textarea
+            ><span class="msg"></span>
+          </div>
+          <button class="btn fill mag" type="submit" id="sendBtn">
+            send message
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- footer marquee -->
+    <div class="mq big" aria-hidden="true">
+      <div id="mq2">
+        <span>let's build something</span><b>✦</b><span>say hello</span><b>✦</b
+        ><span>let's build something</span><b>✦</b><span>say hello</span
+        ><b>✦</b>
+      </div>
+    </div>
+
+    <footer class="end mono">
+      <span>© <span id="yr"></span> sarmad tabassum</span>
+      <span>hand-coded · no frameworks · view-source friendly</span>
+      <a class="top-btn" href="#top" aria-label="Back to top">↑</a>
+    </footer>
+
+    <div id="toast" role="status"></div>
+
+    <!-- ═══════════════ PRINT RÉSUMÉ ═══════════════ -->
+    <div class="resume">
+      <h1>Sarmad Tabassum</h1>
+      <p class="rc">
+        Frontend Developer · +92 335 3949723 · sarmadtabassum7@gmail.com · Majeed
+        S.R.E Stadium Road, Karachi · github.com/sarmad-tabassum
+      </p>
+
+      <h2>Summary</h2>
+      <p>
+        Frontend-focused web developer with a strong foundation in HTML5, CSS3,
+        JavaScript, React.js and Tailwind CSS, currently expanding full-stack
+        skills through the Web &amp; App Development course at Saylani Mass IT.
+        Experienced in building responsive interfaces, integrating REST APIs,
+        and working with Supabase for backend data and storage.
+      </p>
+
+      <h2>Education</h2>
+      <p>
+        <strong>2023 – 2025 &nbsp; FSc (Pre-Engineering)</strong><br />Bahria
+        College Karsaz, Karachi
+      </p>
+      <p>
+        <strong>2021 – 2023 &nbsp; Matriculation</strong><br />Bahria College
+        Karsaz, Karachi
+      </p>
+
+      <h2>Certifications &amp; Training</h2>
+      <p>
+        <strong>In Progress — Web &amp; App Development Course</strong
+        ><br />Saylani Mass IT Training, Karachi
+      </p>
+
+      <h2>Technical &amp; Computer Skills</h2>
+      <ul>
+        <li>HTML5 &amp; CSS3</li>
+        <li>JavaScript &amp; Modern JavaScript (ES6+)</li>
+        <li>React.js (Hooks &amp; API Integration)</li>
+        <li>Tailwind CSS</li>
+        <li>Bootstrap &amp; Responsive Design</li>
+        <li>GitHub &amp; Version Control</li>
+        <li>Web Page Structuring &amp; Design</li>
+        <li>REST API Integration</li>
+        <li>Database Management (Supabase)</li>
+        <li>Debugging &amp; Troubleshooting</li>
+        <li>Computer Science Fundamentals</li>
+      </ul>
+
+      <h2>Projects &amp; Technical Experience</h2>
+      <p>
+        <strong>Postify — Post-Publishing Platform</strong><br />Built the front
+        end of a full-stack publishing app end-to-end — CRUD operations,
+        interactive user profiles, and image uploads — connected to Supabase for
+        storage and data management.
+      </p>
+      <p>
+        <strong>Dynamic Weather Application</strong><br />Built an interactive
+        weather-tracking interface using Axios to fetch real-time data from
+        WeatherAPI, with dynamic UI updates and background video transitions
+        based on current conditions.
+      </p>
+      <p>
+        <strong>News Portal Application</strong><br />Built a real-time news
+        feed with vanilla JavaScript and REST APIs, using structured HTML5/CSS3
+        and responsive layouts for a clean reading experience across devices.
+      </p>
+
+      <h2>Key Core Competencies</h2>
+      <ul>
+        <li>
+          Clear communicator, comfortable collaborating in a remote or
+          team-based environment.
+        </li>
+        <li>
+          Strong problem-solving and debugging skills, with an eye for UI
+          detail.
+        </li>
+        <li>
+          Self-motivated and fast at picking up new tools, frameworks, and
+          workflows independently.
+        </li>
+      </ul>
+
+      <h2>Languages</h2>
+      <p>English, Urdu, Punjabi</p>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
