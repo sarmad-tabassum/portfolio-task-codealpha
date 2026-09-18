@@ -74,12 +74,7 @@ Project Link: https://github.com/sarmad-tabassum/portfolio-task-codealpha
 ⭐ If you find this internship task impressive, please consider giving it a star!
 
 
----
 
-### Pro-Tip for CodeAlpha & Decode Labs Repos:
-Jab aap apne GitHub par **CodeAlpha** aur **Decode Labs** dono internships k tasks ko structured format me display karte hain, toh aapki profile ek seasoned frontend developer ki tarah shine karti hai. Is README ko add karke repo ko star aur pin karna mat bhooliye ga!
-
-<ElicitationsGroup message="Aage kya karna chahenge?">
   <Elicitation label="CodeAlpha Task LinkedIn Post Draft" query="CodeAlpha internship k is task k lye LinkedIn post aur tags tayar kar ke dein."/>
   <Elicitation label="GitHub Profile Pinned Repos Strategy" query="Meri GitHub profile par DecodeLabs aur CodeAlpha repos ko top par highlight karne ki strategy batayein."/>
 </ElicitationsGroup>
