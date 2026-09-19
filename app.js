@@ -1,456 +1,436 @@
-/* ============================================================
-   IMPORTANT: SARA CONTENT HTML ME HAI — YAHAN SIRF
-   BEHAVIOR/ANIMATIONS HAIN.
-   ============================================================ */
-
-// Check agar user mouse/cursor use kar raha hai 
-const isDesktop = window.matchMedia("(pointer:fine)").matches;
+let isDesktop = window.matchMedia("(pointer:fine)").matches;
 
 /* ------------------------------------------------------------
-   1. Marquee Animation (Seamless Infinite Loop)
+   1. Marquee Animation (Content ko double karna)
    ------------------------------------------------------------ */
-// Content double, taake animation smoothly chale
-const marqueeIds = ["#mq1", "#mq2"];
-marqueeIds.forEach((id) => {
-  const marqueeElement = document.querySelector(id);
-  if (marqueeElement) {
-    marqueeElement.innerHTML += marqueeElement.innerHTML;
-  }
-});
+
+// Selecting both marquee
+let marquee1 = document.querySelector("#mq1");
+let marquee2 = document.querySelector("#mq2");
+
+if (marquee1) {
+  marquee1.innerHTML = marquee1.innerHTML + marquee1.innerHTML;
+}
+if (marquee2) {
+  marquee2.innerHTML = marquee2.innerHTML + marquee2.innerHTML;
+}
 
 /* ------------------------------------------------------------
-   2. Page Loader (000 → 100 Counter)
+   2. Page Loader (0 to 100 counting)
    ------------------------------------------------------------ */
-const loaderElement = document.querySelector("#loader");
-const loaderNumber = document.querySelector("#lnum");
+let loaderElement = document.querySelector("#loader");
+let loaderNumber = document.querySelector("#lnum");
 let loadingPercent = 0;
 
-const loaderInterval = setInterval(() => {
-  loadingPercent = Math.min(
-    100,
-    loadingPercent + Math.floor(Math.random() * 11) + 5,
-  );
+// Run after 60 milliseconds
+let loaderInterval = setInterval(function () {
+  loadingPercent = loadingPercent + 5; // 5 karke number barhao
 
-  loaderNumber.textContent = String(loadingPercent).padStart(3, "0");
+  if (loadingPercent > 100) {
+    loadingPercent = 100;
+  }
 
-  if (loadingPercent >= 100) {
+  // Showing Number in screen (ex 005, 050, 100)
+  if (loadingPercent < 10) {
+    loaderNumber.textContent = "00" + loadingPercent;
+  } else if (loadingPercent < 100) {
+    loaderNumber.textContent = "0" + loadingPercent;
+  } else {
+    loaderNumber.textContent = loadingPercent;
+  }
+
+  if (loadingPercent === 100) {
     clearInterval(loaderInterval);
-    setTimeout(() => {
+
+    setTimeout(function () {
       loaderElement.classList.add("done");
       document.body.classList.add("ready");
-    }, 280);
+    }, 300); // Delay 300ms
   }
-}, 65);
+}, 60);
 
 /* ------------------------------------------------------------
-   3. Custom Smooth Cursor
+   3. Custom Smooth Cursor (Sirf Desktop ke liye)
    ------------------------------------------------------------ */
 if (isDesktop) {
   document.body.classList.add("cur-on");
 
-  const cursorDot = document.querySelector("#cdot");
-  const cursorRing = document.querySelector("#cring");
+  let cursorDot = document.querySelector("#cdot");
+  let cursorRing = document.querySelector("#cring");
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
+  // Mouse kahan par hai, uski position save karne ke variable
+  let mouseX = 0;
+  let mouseY = 0;
 
-  // Mouse move hone par dot ko instantly move karna
-  window.addEventListener("mousemove", (event) => {
+  // Jab bhi mouse hilega, ye function chalega
+  window.addEventListener("mousemove", function (event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
-    cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+
+    // Chota dot form fauran mouse ki jagah par chala jayega
+    cursorDot.style.transform = "translate(" + mouseX + "px, " + mouseY + "px)";
   });
 
-  // Ring ko halki smooth lag ke saath peeche lana (Lerp effect)
-  function renderCursorRing() {
-    ringX += (mouseX - ringX) * 0.16;
-    ringY += (mouseY - ringY) * 0.16;
-    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px)`;
-    requestAnimationFrame(renderCursorRing);
-  }
-  renderCursorRing();
+  // Badi ring ko thora smoothly mouse ke piche lane ke liye
+  let ringX = 0;
+  let ringY = 0;
 
-  // Links/Buttons par hover karte waqt cursor style change karna
-  document.addEventListener("mouseover", (event) => {
-    const isProjectRow = !!event.target.closest(".row");
-    const isInteractive = !!event.target.closest("a, button, input, textarea");
+  setInterval(function () {
+    // Ring ki position ko mouse ki position ke qareeb late raho
+    ringX = ringX + (mouseX - ringX) * 0.2;
+    ringY = ringY + (mouseY - ringY) * 0.2;
 
-    cursorRing.classList.toggle("view", isProjectRow);
-    cursorRing.classList.toggle("big", isInteractive);
+    cursorRing.style.transform = "translate(" + ringX + "px, " + ringY + "px)";
+  }, 15); // Updating after 15ms
+
+  // Hover effects
+  document.addEventListener("mouseover", function (event) {
+    // If user hovering in link or button
+    let isLink = event.target.closest("a, button, input, textarea");
+    if (isLink) {
+      cursorRing.classList.add("big");
+    } else {
+      cursorRing.classList.remove("big");
+    }
+
+    // If user hovering in project row
+    let isProject = event.target.closest(".row");
+    if (isProject) {
+      cursorRing.classList.add("view");
+    } else {
+      cursorRing.classList.remove("view");
+    }
   });
 }
 
 /* ------------------------------------------------------------
    4. Top Scroll Progress Bar
    ------------------------------------------------------------ */
-const progressBar = document.querySelector("#prog");
+let progressBar = document.querySelector("#prog");
 
-window.addEventListener(
-  "scroll",
-  () => {
-    const doc = document.documentElement;
-    const totalScrollableHeight = doc.scrollHeight - doc.clientHeight;
-    const currentScrollPercentage =
-      (doc.scrollTop / totalScrollableHeight) * 100;
+window.addEventListener("scroll", function () {
+  let scrollPura =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
+  let scrollAbhi = document.documentElement.scrollTop;
 
-    progressBar.style.width = currentScrollPercentage + "%";
-  },
-  { passive: true },
-);
+  // Percentage calculate
+  let percentage = (scrollAbhi / scrollPura) * 100;
 
-/* ------------------------------------------------------------
-   5. Scroll Reveal Animations
-   ------------------------------------------------------------ */
-// Every reveal element ko delay assign karna
-const sections = document.querySelectorAll("section");
-sections.forEach((sec) => {
-  const revealElements = sec.querySelectorAll(".rv");
-  revealElements.forEach((el, index) => {
-    const delay = Math.min(index * 90, 420);
-    el.style.setProperty("--d", delay + "ms");
-  });
+  // Setting bar width
+  progressBar.style.width = percentage + "%";
 });
 
-// Screen par aate hi animation trigger karna
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.12 },
-);
-
-const allRevealItems = document.querySelectorAll(".rv, .tli");
-allRevealItems.forEach((el) => revealObserver.observe(el));
-
 /* ------------------------------------------------------------
-   6. Number Count-Up Animation (Stats Section)
+   5. Scroll Reveal Animations 
    ------------------------------------------------------------ */
-const counterObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
+let allRevealItems = document.querySelectorAll(".rv, .tli, #process");
 
-      counterObserver.unobserve(entry.target);
-      const element = entry.target;
-      const targetValue = Number(element.dataset.count);
-      const suffix = element.dataset.suf || "";
-      const startTime = performance.now();
-      const duration = 1500;
+// Checking for every element
+for (let i = 0; i < allRevealItems.length; i++) {
+  let item = allRevealItems[i];
 
-      function updateCounter(currentTime) {
-        const progress = Math.min(1, (currentTime - startTime) / duration);
-        // Ease-out formula for smooth ending
-        const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+  window.addEventListener("scroll", function () {
+    let itemPosition = item.getBoundingClientRect().top;
+    let screenHeight = window.innerHeight;
 
-        element.textContent =
-          Math.round(targetValue * easeOutProgress) + suffix;
+    if (itemPosition < screenHeight - 50) {
+      item.classList.add("in");
 
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter);
-        }
+      // Specific class of process section
+      if (item.id === "process") {
+        item.classList.add("on");
       }
-      requestAnimationFrame(updateCounter);
-    });
-  },
-  { threshold: 0.6 },
-);
-
-const countElements = document.querySelectorAll(".cnt");
-countElements.forEach((el) => counterObserver.observe(el));
-
-/* ------------------------------------------------------------
-   7. Hero Role Text Scramble
-   ------------------------------------------------------------ */
-const roleElement = document.querySelector("#role");
-const rolesList = roleElement.dataset.roles.split(",").map((str) => str.trim());
-let currentRoleIndex = 0;
-
-function scrambleTextTo(targetText) {
-  const randomChars = "#%&@*+=—/";
-  let frame = 0;
-
-  function animateFrame() {
-    frame++;
-    const scrambled = targetText
-      .split("")
-      .map((char, index) => {
-        if (char === " ") return " ";
-        if (index < frame / 2) return char;
-        return randomChars[Math.floor(Math.random() * randomChars.length)];
-      })
-      .join("");
-
-    roleElement.textContent = scrambled;
-
-    if (frame / 2 < targetText.length) {
-      requestAnimationFrame(animateFrame);
-    } else {
-      roleElement.textContent = targetText;
     }
-  }
-  animateFrame();
+  });
 }
 
-setInterval(() => {
-  currentRoleIndex = (currentRoleIndex + 1) % rolesList.length;
-  scrambleTextTo(rolesList[currentRoleIndex]);
-}, 2800);
+/* ------------------------------------------------------------
+   6. Number Count-Up Animation (Stats)
+   ------------------------------------------------------------ */
+let countElements = document.querySelectorAll(".cnt");
+
+for (let i = 0; i < countElements.length; i++) {
+  let element = countElements[i];
+  let targetValue = parseInt(element.getAttribute("data-count"));
+  let suffix = element.getAttribute("data-suf") || "";
+  let currentValue = 0;
+
+  // Count start when scrolling
+  window.addEventListener("scroll", function startCount() {
+    let position = element.getBoundingClientRect().top;
+
+    if (position < window.innerHeight) {
+      window.removeEventListener("scroll", startCount);
+
+      // Simple timer base counting
+      let step = Math.ceil(targetValue / 50); // setting speed
+
+      let timer = setInterval(function () {
+        currentValue = currentValue + step;
+
+        if (currentValue >= targetValue) {
+          currentValue = targetValue;
+          clearInterval(timer);
+        }
+
+        element.textContent = currentValue + suffix;
+      }, 30);
+    }
+  });
+}
+
+/* ------------------------------------------------------------
+   7. Hero Role Text Scramble 
+   ------------------------------------------------------------ */
+let roleElement = document.querySelector("#role");
+let rolesList = [
+  "frontend developer",
+  "react.js developer",
+  "tailwind css enjoyer",
+  "rest api integrator",
+];
+let roleIndex = 0;
+
+setInterval(function () {
+  // Select next role
+  roleIndex = roleIndex + 1;
+  if (roleIndex >= rolesList.length) {
+    roleIndex = 0;
+  }
+
+  let newRole = rolesList[roleIndex];
+  roleElement.textContent = newRole; // Direct changed (scramble math is hard for beginners)
+}, 3000); // Run after 3 seconds
 
 /* ------------------------------------------------------------
    8. Magnetic Buttons Effect
    ------------------------------------------------------------ */
 if (isDesktop) {
-  const magneticButtons = document.querySelectorAll(".mag");
+  let magneticButtons = document.querySelectorAll(".mag");
 
-  magneticButtons.forEach((button) => {
-    button.addEventListener("mousemove", (event) => {
-      const rect = button.getBoundingClientRect();
-      const moveX = (event.clientX - rect.left - rect.width / 2) * 0.25;
-      const moveY = (event.clientY - rect.top - rect.height / 2) * 0.25;
-      button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  for (let i = 0; i < magneticButtons.length; i++) {
+    let button = magneticButtons[i];
+
+    button.addEventListener("mousemove", function (event) {
+      let rect = button.getBoundingClientRect();
+      let centerX = rect.left + rect.width / 2;
+      let centerY = rect.top + rect.height / 2;
+
+      let moveX = (event.clientX - centerX) * 0.2;
+      let moveY = (event.clientY - centerY) * 0.2;
+
+      button.style.transform = "translate(" + moveX + "px, " + moveY + "px)";
     });
 
-    button.addEventListener("mouseleave", () => {
-      button.style.transform = "";
+    button.addEventListener("mouseleave", function () {
+      button.style.transform = "translate(0px, 0px)"; // Reset
     });
-  });
+  }
 }
 
 /* ------------------------------------------------------------
-   9. Accordion (One Open at a Time)
+   9. Accordion (Open when clicked on project)
    ------------------------------------------------------------ */
-const accordionButtons = document.querySelectorAll(".row");
+let accordionButtons = document.querySelectorAll(".row");
 
-accordionButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const isCurrentlyOpen = button.getAttribute("aria-expanded") === "true";
+for (let i = 0; i < accordionButtons.length; i++) {
+  let button = accordionButtons[i];
 
-    // Baqi sabhi open panels ko close kar do
-    accordionButtons.forEach((otherButton) => {
-      if (otherButton !== button) {
-        otherButton.setAttribute("aria-expanded", "false");
-        const panel = otherButton.parentElement.querySelector(".panel");
-        panel.style.maxHeight = "0px";
-      }
-    });
+  button.addEventListener("click", function () {
+    let isOpen = button.getAttribute("aria-expanded") === "true";
 
-    // Current panel ko toggle karo
-    button.setAttribute("aria-expanded", String(!isCurrentlyOpen));
-    const currentPanel = button.parentElement.querySelector(".panel");
-    currentPanel.style.maxHeight = isCurrentlyOpen
-      ? "0px"
-      : currentPanel.scrollHeight + "px";
+    // Closing all
+    for (let j = 0; j < accordionButtons.length; j++) {
+      let otherBtn = accordionButtons[j];
+      otherBtn.setAttribute("aria-expanded", "false");
+      otherBtn.parentElement.querySelector(".panel").style.maxHeight = "0px";
+    }
+
+    // If close than open it
+    if (isOpen === false) {
+      button.setAttribute("aria-expanded", "true");
+      let panel = button.parentElement.querySelector(".panel");
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
   });
-});
+}
 
 /* ------------------------------------------------------------
    10. Project Image Hover Preview
    ------------------------------------------------------------ */
 if (isDesktop) {
-  const previewBox = document.querySelector("#peek");
-  const previewImage = previewBox.querySelector("img");
-  const projectListContainer = document.querySelector("#rows");
+  let previewBox = document.querySelector("#peek");
+  let previewImage = previewBox.querySelector("img");
+  let projectListContainer = document.querySelector("#rows");
 
-  let targetX = 0,
-    targetY = 0;
-  let currentX = 0,
-    currentY = 0;
-
-  projectListContainer.addEventListener("mousemove", (event) => {
-    targetX = event.clientX;
-    targetY = event.clientY;
+  // Mouse move par box ki position set karo
+  projectListContainer.addEventListener("mousemove", function (event) {
+    let x = event.clientX + 20;
+    let y = event.clientY - 80;
+    previewBox.style.transform = "translate(" + x + "px, " + y + "px)";
   });
 
-  projectListContainer.addEventListener("mouseover", (event) => {
-    const activeRow = event.target.closest(".row");
-    if (activeRow && activeRow.dataset.img) {
-      if (previewImage.src !== activeRow.dataset.img) {
-        previewImage.src = activeRow.dataset.img;
-      }
+  // Project hovering
+  projectListContainer.addEventListener("mouseover", function (event) {
+    let activeRow = event.target.closest(".row");
+    if (activeRow && activeRow.getAttribute("data-img")) {
+      previewImage.src = activeRow.getAttribute("data-img");
       previewBox.classList.add("on");
     }
   });
 
-  projectListContainer.addEventListener("mouseleave", () => {
+  // If mouse leaving hide img
+  projectListContainer.addEventListener("mouseleave", function () {
     previewBox.classList.remove("on");
   });
-
-  function renderPreviewPosition() {
-    currentX += (targetX - currentX) * 0.12;
-    currentY += (targetY - currentY) * 0.12;
-    const rotation = (targetX - currentX) * 0.04;
-
-    previewBox.style.transform = `translate(${currentX + 28}px, ${currentY - 95}px) rotate(${rotation}deg)`;
-    requestAnimationFrame(renderPreviewPosition);
-  }
-  renderPreviewPosition();
 }
 
 /* ------------------------------------------------------------
-   11. Process Section Draw Animation
+   11. Email Scramble on Hover
    ------------------------------------------------------------ */
-const processSection = document.querySelector("#process");
+let emailElement = document.querySelector("[data-scramble]");
 
-if (processSection) {
-  const processObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("on");
-          observer.unobserve(entry.target);
+if (emailElement) {
+  let originalEmail = emailElement.textContent;
+  let randomChars = "#%&@*+=—";
+
+  emailElement.addEventListener("mouseenter", function () {
+    let count = 0;
+    let scrambleTimer = setInterval(function () {
+      count++;
+
+      // Creating random characters
+      let fakeText = "";
+      for (let i = 0; i < originalEmail.length; i++) {
+        if (i < count) {
+          fakeText += originalEmail[i];
+        } else {
+          let randomNum = Math.floor(Math.random() * randomChars.length);
+          fakeText += randomChars[randomNum];
         }
-      });
-    },
-    { threshold: 0.3 },
-  );
+      }
 
-  processObserver.observe(processSection);
+      emailElement.textContent = fakeText;
+
+      if (count >= originalEmail.length) {
+        clearInterval(scrambleTimer);
+        emailElement.textContent = originalEmail;
+      }
+    }, 40);
+  });
 }
 
 /* ------------------------------------------------------------
-   12. Email Scramble on Hover
+   12. Live Karachi Clock (PKT Time)
    ------------------------------------------------------------ */
-const scrambleElements = document.querySelectorAll("[data-scramble]");
+setInterval(function () {
+  let now = new Date();
 
-scrambleElements.forEach((element) => {
-  const originalText = element.textContent;
-  let animationFrameId;
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
 
-  element.addEventListener("mouseenter", () => {
-    cancelAnimationFrame(animationFrameId);
-    const randomChars = "#%&@*+=—";
-    let frame = 0;
+  if (hours < 10) hours = "0" + hours;
+  if (minutes < 10) minutes = "0" + minutes;
+  if (seconds < 10) seconds = "0" + seconds;
 
-    function animateHoverText() {
-      frame++;
-      const scrambled = originalText
-        .split("")
-        .map((char, index) => {
-          if (char === " ") return " ";
-          if (index < frame / 1.5) return char;
-          return randomChars[Math.floor(Math.random() * randomChars.length)];
-        })
-        .join("");
+  let timeString = hours + ":" + minutes + ":" + seconds + " pkt";
 
-      element.textContent = scrambled;
+  let clockElement1 = document.querySelector("#clock");
+  let clockElement2 = document.querySelector("#clock2");
 
-      if (frame / 1.5 < originalText.length) {
-        animationFrameId = requestAnimationFrame(animateHoverText);
-      } else {
-        element.textContent = originalText;
-      }
-    }
-    animateHoverText();
-  });
-});
-
-/* ------------------------------------------------------------
-   13. Live Karachi Clock (PKT Time)
-   ------------------------------------------------------------ */
-const timeFormatter = new Intl.DateTimeFormat("en-GB", {
-  timeZone: "Asia/Karachi",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-});
-
-setInterval(() => {
-  const currentTimeString = timeFormatter.format(new Date()) + " pkt";
-
-  const clockElement1 = document.querySelector("#clock");
-  const clockElement2 = document.querySelector("#clock2");
-
-  if (clockElement1) clockElement1.textContent = "khi — " + currentTimeString;
-  if (clockElement2) clockElement2.textContent = currentTimeString;
+  if (clockElement1) clockElement1.textContent = "khi — " + timeString;
+  if (clockElement2) clockElement2.textContent = timeString;
 }, 1000);
 
 /* ------------------------------------------------------------
-   14. Contact Form Validation & Toast Notification
+   13. Contact Form Validation (Simple If-Else)
    ------------------------------------------------------------ */
-const contactForm = document.querySelector("#cform");
-const toastNotification = document.querySelector("#toast");
-
-function displayToast(message) {
-  toastNotification.textContent = message;
-  toastNotification.classList.add("show");
-
-  clearTimeout(toastNotification._timer);
-  toastNotification._timer = setTimeout(() => {
-    toastNotification.classList.remove("show");
-  }, 3200);
-}
-
-function validateField(fieldId, errorMessage) {
-  const inputElement = document.getElementById(fieldId);
-  const parentContainer = inputElement.parentElement;
-  const messageBox = parentContainer.querySelector(".msg");
-
-  const hasError = !!errorMessage;
-  parentContainer.classList.toggle("bad", hasError);
-  messageBox.textContent = errorMessage || "";
-
-  return !hasError;
-}
+let contactForm = document.querySelector("#cform");
+let toastNotification = document.querySelector("#toast");
 
 if (contactForm) {
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const fullNameInput = document.querySelector("#fn").value.trim();
-    const emailInput = document.querySelector("#fe").value.trim();
-    const messageInput = document.querySelector("#fm").value.trim();
+    // Getting Inputs val
+    let nameInput = document.querySelector("#fn");
+    let emailInput = document.querySelector("#fe");
+    let messageInput = document.querySelector("#fm");
 
-    const isNameValid = validateField(
-      "fn",
-      fullNameInput.length >= 2 ? "" : "Please enter your name",
-    );
-    const isEmailValid = validateField(
-      "fe",
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput)
-        ? ""
-        : "Enter a valid email",
-    );
-    const isMessageValid = validateField(
-      "fm",
-      messageInput.length >= 10
-        ? ""
-        : "Message should be at least 10 characters",
-    );
+    let isFormValid = true;
 
-    if (isNameValid && isEmailValid && isMessageValid) {
-      const sendButton = document.querySelector("#sendBtn");
+    // 1. Name check
+    if (nameInput.value.trim().length < 2) {
+      nameInput.parentElement.classList.add("bad");
+      nameInput.parentElement.querySelector(".msg").textContent =
+        "Please enter your name";
+      isFormValid = false;
+    } else {
+      nameInput.parentElement.classList.remove("bad");
+      nameInput.parentElement.querySelector(".msg").textContent = "";
+    }
+
+    // 2. Email check
+    if (
+      emailInput.value.includes("@") === false ||
+      emailInput.value.includes(".") === false
+    ) {
+      emailInput.parentElement.classList.add("bad");
+      emailInput.parentElement.querySelector(".msg").textContent =
+        "Enter a valid email";
+      isFormValid = false;
+    } else {
+      emailInput.parentElement.classList.remove("bad");
+      emailInput.parentElement.querySelector(".msg").textContent = "";
+    }
+
+    // 3. Message check
+    if (messageInput.value.trim().length < 10) {
+      messageInput.parentElement.classList.add("bad");
+      messageInput.parentElement.querySelector(".msg").textContent =
+        "Message should be at least 10 characters";
+      isFormValid = false;
+    } else {
+      messageInput.parentElement.classList.remove("bad");
+      messageInput.parentElement.querySelector(".msg").textContent = "";
+    }
+
+    if (isFormValid === true) {
+      let sendButton = document.querySelector("#sendBtn");
       sendButton.textContent = "sending…";
-      sendButton.disabled = true;
 
-      setTimeout(() => {
+      setTimeout(function () {
         sendButton.textContent = "send message";
-        sendButton.disabled = false;
         contactForm.reset();
-        displayToast("message sent — I'll reply within 24h.");
-      }, 900);
+
+        // For Toast message
+        toastNotification.textContent = "message sent — I'll reply within 24h.";
+        toastNotification.classList.add("show");
+
+        // After 3 second hide toast
+        setTimeout(function () {
+          toastNotification.classList.remove("show");
+        }, 3000);
+      }, 1000);
     }
   });
 }
 
 /* ------------------------------------------------------------
-   15. Utilities (CV Print & Current Year)
+   14. Utilities (CV Print & Current Year)
    ------------------------------------------------------------ */
-const cvButton = document.querySelector("#cvBtn");
+let cvButton = document.querySelector("#cvBtn");
 if (cvButton) {
-  cvButton.addEventListener("click", (event) => {
+  cvButton.addEventListener("click", function (event) {
     event.preventDefault();
     window.print();
   });
 }
 
-const yearElement = document.querySelector("#yr");
+let yearElement = document.querySelector("#yr");
 if (yearElement) {
-  yearElement.textContent = new Date().getFullYear();
+  let currentYear = new Date().getFullYear();
+  yearElement.textContent = currentYear;
 }
